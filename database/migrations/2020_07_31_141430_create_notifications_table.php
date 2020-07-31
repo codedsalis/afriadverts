@@ -14,8 +14,8 @@ class CreateNotificationsTable extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-            $table->foreign('user_id');
+            $table->increments('id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('title', 255);
             $table->mediumText('message');
             $table->boolean('read');

@@ -14,8 +14,8 @@ class CreateAdUnitsTable extends Migration
     public function up()
     {
         Schema::create('ad_units', function (Blueprint $table) {
-            $table->id();
-            $table->foreign('user_id');
+            $table->increments('id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('unit_title');
             $table->string('url', 255);
             $table->string('category', 64);
