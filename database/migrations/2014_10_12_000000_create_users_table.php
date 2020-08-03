@@ -14,13 +14,25 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 150);
+            $table->increments('id');
+            $table->string('first_name', 100);
+            $table->string('last_name', 100);
             $table->string('email', 256)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 256);
-            $table->decimal('publisher_balance', 13, 2);
-            $table->decimal('advertiser_balance', 13, 2);
+            $table->integer('publisher_balance')->unsigned()->default(0);
+            $table->integer('advertiser_balance')->unsigned()->default(0);
+            $table->ipAddress('ip_address');
+            $table->mediumText('browser');
+            $table->string('country', 55);
+            $table->string('phone_number', 20);
+            $table->text('address');
+            $table->integer('alltime_earning')->unsigned()->default(0);
+            $table->timestamp('last_login')->nullable();
+            $table->boolean('verified')->default(0);
+            $table->boolean('approved')->default(0);
+            $table->char('currency', 3)->default('NGN');
+            $table->integer('referrer')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdUnitsTable extends Migration
+class CreateSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,19 @@ class CreateAdUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_units', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('unit_title');
-            $table->integer('site_id')->unsigned();
-            $table->foreign('site_id')->references('id')->on('sites');
+            $table->string('url', 255);
             $table->string('category', 64);
+            $table->string('pub_key', 45);
+            $table->boolean('verified');
+            $table->boolean('approved');
+            $table->string('reason_unapproved');
+            $table->integer('page_views')->unsigned();
+            $table->integer('earning')->unsigned();
+            $table->integer('ctr')->unsigned();
             $table->timestamps();
         });
     }
@@ -32,6 +37,6 @@ class CreateAdUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ad_units');
+        Schema::dropIfExists('sites');
     }
 }

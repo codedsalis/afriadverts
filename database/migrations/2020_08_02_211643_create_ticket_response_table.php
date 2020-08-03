@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdUnitsTable extends Migration
+class CreateTicketResponseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateAdUnitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ad_units', function (Blueprint $table) {
+        Schema::create('ticket_response', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('unit_title');
-            $table->integer('site_id')->unsigned();
-            $table->foreign('site_id')->references('id')->on('sites');
-            $table->string('category', 64);
+            $table->integer('ticket_id')->unsigned();
+            $table->foreign('ticket_id')->references('id')->on('support_tickets');
+            $table->text('message');
+            $table->boolean('read');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateAdUnitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ad_units');
+        Schema::dropIfExists('ticket_response');
     }
 }
