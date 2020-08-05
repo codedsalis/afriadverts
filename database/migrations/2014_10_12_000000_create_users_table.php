@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->ipAddress('ip_address');
             $table->mediumText('browser');
             $table->string('country', 55);
-            $table->string('phone_number', 20);
-            $table->text('address');
+            $table->string('phone_number', 20)->nullable();
+            $table->text('address')->nullable();
             $table->integer('alltime_earning')->unsigned()->default(0);
             $table->timestamp('last_login')->nullable();
             $table->boolean('verified')->default(0);
