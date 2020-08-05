@@ -25,7 +25,7 @@
                             <br/>
                             <label for="password">{{ __('Password') }}</label>
                             <br/>
-                            <input id="password" type="password" class="border border-gray-300 w-full rounded p-3 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <input id="password" type="password" class="border border-gray-300 w-full rounded p-3 @error('password') is-invalid @enderror" name="password" required>
 
                             @error('password')
                                     <br/>
@@ -35,10 +35,19 @@
                             @enderror
 
                             <br/>
-                            <input class="m-4 mr-0" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label for="remember">
-                                    {{ __('Remember Me') }}
-                            </label>
+                            <div class="flex">
+                                <div class="flex-1">
+                                    <input class="m-4 mr-0" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                                <div class="flex-1 m-4">
+                                    <a class="text-aa-light hover:text-aa-light-active" href="{{ route('password.request') }}">
+                                        Forgot Password?
+                                    </a>
+                                </div>
+                            </div>  
 
                             <br/>
                             <div class="flex flex-wrap">
@@ -48,11 +57,11 @@
                                     </button>
                                 </div>
 
-                                <div class="flex-2">
+                                <div class="flex-1">
                                     @if (Route::has('password.request'))
-                                        <a class="text-aa-light" href="{{ route('password.request') }}">
+                                        <a href="{{ route('register') }}">
                                             <button type="button" class="flex-shrink-0 w-full bg-aa-light text-white p-2 hover:bg-aa-light-active focus:bg-aa-light-active">
-                                                <i class="fa fa-key"></i> Retrieve Password
+                                                <i class="fa fa-key"></i> Register
                                             </button>
                                         </a>
                                     @endif
