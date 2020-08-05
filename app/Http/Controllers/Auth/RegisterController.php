@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Jenssegers\Agent\Agent;
+use Illuminate\Support\Facades\Request;
 
 class RegisterController extends Controller
 {
@@ -50,9 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'alpha', 'string', 'max:100'],
+            'lastname' => ['required', 'alpha', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'country' => ['required', 'string'],
         ]);
     }
 
@@ -64,10 +68,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $agent = new Agent();
+
+        if($agent->isRobot()) {
+            $browserInfo = $agent->robot();
+        }
+        else {
+            $browser = $agent->browser();
+            $version = $agent->version($browser);
+            $browserInfo = $browser . ' (' . $version . ')';
+        }
+        
+
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['firstname'],
+            'last_name' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'country' => $data['country'],
+            'ip_address' => Request::ip(),
+            'browser' => $browserInfo,
         ]);
     }
 }
