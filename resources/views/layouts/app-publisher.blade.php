@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        @yield('title')
+        @yield('title') | {{ config('app.name') }}
     </title>
 
     <!-- Scripts -->
@@ -22,12 +22,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/ico">
+
     {{-- Font Awesome CDN --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 </head>
 
-<body class="bg-gray-300 overflow-y-hidden">
+<body class="bg-gray-200 overflow-y-hidden">
     <div id="app">
         {{-- <nav-bar></nav-bar> --}}
         <nav class="flex bg-white text-aa-dark shadow-md sticky justify-between px-6 h-16">
@@ -42,7 +46,8 @@
                 <b class="h-100 font-bold text-2xl italic">Pub</b>
             </div>
             <div>
-                <button class="bg-transparent text-gray-700 text-xl rounded-full px-3 py-2 mt-2 hover:bg-gray-300">
+                <button
+                    class="animation bg-transparent text-gray-700 text-xl rounded-full px-3 py-2 mt-2 hover:bg-gray-300 hover:scale-105">
                     <b>
                         @if (Auth::user()->currency === 'USD')
                             $
@@ -53,10 +58,20 @@
                     </b>
                 </button>
                 <a href="">
-                    <button class="sm:hidden bg-transparent rounded-full px-3 py-2 hover:bg-gray-300">
+                    <button
+                        class="sm:hidden animation bg-transparent rounded-full px-3 py-2 hover:bg-gray-300 hover:scale-110">
                         <i class="fa fa-cog"></i>
                     </button>
                 </a>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                                                                                                                                     document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
                 {{-- <b class="text-aa-dark text-center items-center p-3">
                     {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                 </b> --}}
@@ -64,8 +79,8 @@
         </nav>
 
         <div class="flex h-screen">
-            <div class="bg-aa-dark w-0 md:w-1/5 invisible md:visible overflow-auto text-dark-200 p-0 md:p-4">
-
+            <div class="bg-gray-100 w-0 md:w-1/5 invisible md:visible overflow-auto text-black p-0 md:p-2">
+                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                 <br />
                 <br />
                 <br />

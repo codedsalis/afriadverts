@@ -2,4 +2,47 @@
 
 @tailwind components;
 
+.btn-dark {
+    @apply transition duration-700 ease-in-out bg-aa-dark text-white rounded-full p-3;
+}
+
+.btn-light {
+    @apply transition duration-700 ease-in-out bg-aa-light text-white rounded-full p-3;
+}
+
+.animation {
+    @apply transform transition-all duration-500;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 18em;
+}
+
+.loader {
+    border: 3px solid #ccc;
+    border-radius: 50%;
+    border-top: 3px solid #2c3e50;
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    margin-bottom: 7px;
+    -webkit-animation: spin .7s linear infinite;
+    animation: spin .7s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @tailwind utilities;

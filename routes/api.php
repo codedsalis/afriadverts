@@ -17,3 +17,30 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+//Site group routes for 'site/{abc}'
+Route::group(['prefix' => 'site'], function () {
+    //Get site by id
+    Route::get('/{id}', 'Api\SitesController@show');
+    
+    
+    //Delete a site
+    Route::delete('delete/{id}', 'Api\SitesController@destroy');
+    
+    //Create a new site
+    Route::post('/', 'Api\SitesController@store');
+    
+    //Update a site
+    Route::put('/', 'Api\SitesController@store');
+
+    //The '/' route should always be last to avoid introducing bug
+});
+
+
+//Get all sites created by a particular user
+Route::get('sites/user/{id}', 'Api\SitesController@usersites');
+
+//Get all sites
+Route::get('sites', 'Api\SitesController@index');

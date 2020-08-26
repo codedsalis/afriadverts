@@ -20,12 +20,13 @@ class CreateSitesTable extends Migration
             $table->string('url', 255);
             $table->string('category', 64);
             $table->string('pub_key', 45);
-            $table->boolean('verified');
-            $table->boolean('approved');
-            $table->string('reason_unapproved');
-            $table->integer('page_views')->unsigned();
-            $table->integer('earning')->unsigned();
-            $table->integer('ctr')->unsigned();
+            $table->text('verification_code');
+            $table->boolean('verified')->default(0)->nullable();
+            $table->boolean('approved')->default(0)->nullable();
+            $table->string('reason_unapproved')->nullable();
+            $table->integer('page_views')->unsigned()->default(0);
+            $table->integer('earning')->unsigned()->default(0);
+            $table->integer('ctr')->unsigned()->default(0);
             $table->timestamps();
         });
     }

@@ -23,6 +23,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard.overview');
     }
+
+
+    /**
+     * Show the publisher dashboard
+     * 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function publisher()
+    {
+        return view('dashboard.publisher');
+    }
+
+
+    /**
+    * Show the publisher dashboard
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
+    public function advertiser()
+    {
+    return view('dashboard.advertiser');
+    }
+
 }
