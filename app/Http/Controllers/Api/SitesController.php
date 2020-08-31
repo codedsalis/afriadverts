@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Site;
 use App\Http\Resources\Site as SiteResource;
+use App\Http\Resources\AdunitResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,6 +33,7 @@ class SitesController extends Controller
      */
     public function store(Request $request)
     {
+        //lets validate the request
         $validator = Validator::make($request->all(), [
             'url' => 'required|url',
             'category' => 'required|alpha_dash',
@@ -48,18 +50,11 @@ class SitesController extends Controller
         //Get site id for update if it is a PUT request or create new one if it is a POST request
         $site = $request->isMethod('put') ? Site::findOrFail($request->site_id) : new Site;
 
-        // if ($validator->fails()) {
-
-        // //pass validator errors as errors object for ajax response
-
-        // return response()->json(['errors'=>$validator->errors()]);
-        // }
-
         $site->url = $request->input('url');
         $site->category = $request->input('category');
         $site->user_id = $request->input('userId');
         $site->pub_key = 'site-' . \md5($site->url);
-        $site->verification_code = '<meta name="afri_verification" content="' . $site->pub_key . '"/><script src="https://static.afriadverts.com/js/pubvfpv.js"></script><script>window.onload = function(){var url = ' . $request->url . ';var pid = ' . $request->input('userId') . ';var key = ' . $site->pub_key . ';return renderPageViews({url: url,pid: pid,key: key});};</script>';
+        $site->verification_code = '<meta name="aa_verification" content="' . $site->pub_key . '"/><script src="https://static.afriadverts.com/js/pubvfpv.js"></script><script>window.onload = function(){var url = ' . $request->url . ';var pid = ' . $request->input('userId') . ';var key = ' . $site->pub_key . ';return renderPageViews({url: url,pid: pid,key: key});};</script>';
 
         if($site->save()) {
             return new SiteResource($site);
@@ -151,5 +146,25 @@ class SitesController extends Controller
 
         //Return a resource of user sites
         return new SiteResource($sites);
+    }
+
+
+        /**
+     * Get all sites created by a particular user with the different given conditions
+     * 
+     * @param int $id
+     * @param \Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getadunits($id, Request $request)
+    {
+        $adUnits = DB::table('ad_units')
+                        ->select('*')
+                        ->where('site_id', '=', $id)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+
+        //return a resource of the ad units
+        return new AdunitResource($adUnits);
     }
 }

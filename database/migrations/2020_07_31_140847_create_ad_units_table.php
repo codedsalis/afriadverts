@@ -20,7 +20,8 @@ class CreateAdUnitsTable extends Migration
             $table->string('unit_title');
             $table->integer('site_id')->unsigned();
             $table->foreign('site_id')->references('id')->on('sites');
-            $table->string('category', 64);
+            $table->string('advert_type', 64);
+            $table->text('ad_code');
             $table->timestamps();
         });
     }

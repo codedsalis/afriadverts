@@ -7,6 +7,6 @@
         <header class="text-2xl md:text-3xl font-bold text-gray-900">
             Dashboard
         </header>
-        <publisher-dashboard v-bind:user={{ Auth::user() }}></publisher-dashboard>
+        <publisher-dashboard v-bind:user="{{ Auth::user() }}"></publisher-dashboard>
     </div>
 @endsection

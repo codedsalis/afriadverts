@@ -25,7 +25,10 @@ Route::group(['prefix' => 'site'], function () {
     //Get site by id
     Route::get('/{id}', 'Api\SitesController@show');
     
-    
+    //Get all Ad Units created for a site
+    Route::get('/{id}/adunits', 'Api\SitesController@getadunits');
+
+
     //Delete a site
     Route::delete('delete/{id}', 'Api\SitesController@destroy');
     
@@ -38,9 +41,29 @@ Route::group(['prefix' => 'site'], function () {
     //The '/' route should always be last to avoid introducing bug
 });
 
-
 //Get all sites created by a particular user
 Route::get('sites/user/{id}', 'Api\SitesController@usersites');
 
 //Get all sites
 Route::get('sites', 'Api\SitesController@index');
+
+
+// ----------------------------------------------------------------------------------------
+
+
+//Ad Unit group routes for adunit/{id}
+Route::group(['prefix' => 'adunit'], function () {
+
+    //Get a particular ad unit
+    Route::get('/', 'Api\AdUnitsController@index');
+
+    //create new ad unit
+    Route::post('/', 'Api\AdUnitsController@store');
+
+    //Edit ad unit
+    Route::put('/', 'Api\AdUnitsController@store');
+
+    //Delete Ad Unit
+    Route::delete('/', 'Api\AdUnitsController@destroy');
+});
+

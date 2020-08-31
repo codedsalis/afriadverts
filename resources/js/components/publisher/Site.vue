@@ -10,7 +10,7 @@
           <div class="text-xs font-normal text-gray-600">
             Category: {{ site.category }}
             <b>&middot;</b>
-            Created {{ createdDate }}
+            Created <show-date :date-val="site.created_at"></show-date>
           </div>
           <span v-if="site.verified > 0">
             <span class="bg-green-600 px-3 py-0 text-xs font-bold text-white rounded">Verified</span>
@@ -35,7 +35,7 @@
         <div>
           <a v-bind:href="'/p/site/' + site.id +'/newadunit'">
             <button
-              class="px-5 py-2 bg-light-500 text-white text-sm border border-light-500 rounded-md hover:bg-light-700 focus:border-light-600 mt-2"
+              class="px-4 py-2 bg-light-500 text-white text-sm border border-light-500 rounded-md hover:bg-light-700 focus:border-light-600 mt-2 shadow-md"
             >
               <i class="fa fa-plus"></i> New Ad Unit
             </button>
@@ -109,6 +109,7 @@ Vue.use(VueNoty);
 import "vuejs-noty/dist/vuejs-noty.css";
 
 import AdUnits from "./AdUnits.vue";
+import ShowDate from '../ShowDate';
 
 export default {
   props: ["user", "siteId"],
@@ -136,14 +137,6 @@ export default {
         .then((response) => {
           this.isLoading = false;
           this.site = response.data.data;
-          const date = new Date(response.data.data.created_at);
-          this.createdDate =
-            date.getDate() +
-            "." +
-            (date.getMonth() + 1) +
-            "." +
-            date.getFullYear();
-          this.createInput();
         })
         .catch((error) => {
           console.log(error.response);
@@ -155,8 +148,8 @@ export default {
       vCode.select();
       try {
         const copy = document.execCommand("Copy");
-        this.$noty.success("Copied to clipboard", {
-          layout: "topRight",
+        this.$noty.success("Verification code copied to clipboard", {
+          layout: "bottomRight",
           theme: "nest",
         });
       } catch (err) {

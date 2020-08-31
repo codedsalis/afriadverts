@@ -4,6 +4,6 @@
 
 @section('content')
     <div class="container mx-auto">
-        <site v-bind:user={{ Auth::user() }} v-bind:site-id={{ $siteId }}></site>
+        <site v-bind:user="{{ Auth::user() }}" v-bind:site-id="{{ $siteId }}"></site>
     </div>
 @endsection

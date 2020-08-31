@@ -24,3 +24,9 @@ function createInput() {
     );
     document.querySelector("#vCodeField").appendChild(create);
 }
+
+
+function showDate(dateVal) {
+    dateVal = new Date(dateVal);
+    return dateVal.getDate() + "." + (dateVal.getMonth() + 1) + "." + dateVal.getFullYear();
+}
