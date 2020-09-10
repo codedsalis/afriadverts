@@ -31,15 +31,18 @@ class AdUnitsController extends Controller
     {
         //Lets validate the request
         $validator = Validator::make($request->all(), [
-            'title' => 'required|alpha_dash',
-            'advert_type' => 'required|alpha_dash'
+            'title' => 'required|string',
+            'advertType' => 'required|alpha_dash',
+            'siteId' => 'required|exists:sites,id',
+            'userId' => 'required|exists:users,id'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 $validator->errors()
             ], 403);
         }
+
 
 
         //Because we are using this function for both creation and updating Adunits,
@@ -47,14 +50,15 @@ class AdUnitsController extends Controller
         //Otherwise, we create a new resource
         $adUnit = $request->isMethod('put') ? Adunit::findOrFail($request->unit_id) : new Adunit;
 
-        $adUnit->title = $request->title;
-        $adUnit->advert_type = $request->advert_type;
+        $adUnit->unit_title = strip_tags($request->title);
+        $adUnit->advert_type = $request->advertType;
+        $adUnit->user_id = $request->userId;
+        $adUnit->site_id = $request->siteId;
 
 
-        if($adUnit->save()) {
+        if ($adUnit->save()) {
             return new AdunitResource($adUnit);
         }
-
     }
 
     /**
@@ -65,7 +69,18 @@ class AdUnitsController extends Controller
      */
     public function show($id)
     {
-        //
+        //Check if the ad unit exists or not
+        $adUnit = Adunit::findOrFail($id);
+
+        //Query for the site url together with the ad unit data
+        $siteAndUnit = DB::table('ad_units')
+            ->select('ad_units.*', 'sites.url')
+            ->leftJoin('sites', 'ad_units.site_id', '=', 'sites.id')
+            ->where('ad_units.id', '=', $id)
+            ->get();
+
+        //return a resource of the ad unit if found
+        return new AdunitResource($siteAndUnit);
     }
 
     /**
@@ -77,5 +92,10 @@ class AdUnitsController extends Controller
     public function destroy($id)
     {
         //
+        $adUnit = Adunit::findOrFail($id);
+
+        if ($adUnit->delete($adUnit)) {
+            return new AdunitResource($adUnit);
+        }
     }
 }

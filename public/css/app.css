@@ -772,6 +772,51 @@ video {
   }
 }
 
+.spinner {
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  border-top: 3px solid #2c3e50;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  margin-bottom: 7px;
+  -webkit-animation: load 0.7s linear infinite;
+  animation: load 0.7s linear infinite;
+}
+
+@-webkit-keyframes load {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scrollbar styles */
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

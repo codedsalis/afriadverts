@@ -20,7 +20,6 @@ class CreateSitesTable extends Migration
             $table->string('url', 255);
             $table->string('category', 64);
             $table->string('pub_key', 45);
-            $table->text('verification_code');
             $table->boolean('verified')->default(0)->nullable();
             $table->boolean('approved')->default(0)->nullable();
             $table->string('reason_unapproved')->nullable();

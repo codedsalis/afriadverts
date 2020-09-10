@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,9 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 // Route::group(['prefix' => 'adv'], function () {
-    //     Route::get('/dashboard', 'AdvertiserController@index')->name('advertiser.dashboard');    
-    // });
-    
+//     Route::get('/dashboard', 'AdvertiserController@index')->name('advertiser.dashboard');    
+// });
+
 
 //Routes for Dashboards
 Route::group(['prefix' => 'dashboard'], function () {
@@ -38,12 +39,18 @@ Route::group(['prefix' => 'dashboard'], function () {
 
     //Advertiser routes
     Route::get('/advertiser', 'HomeController@advertiser')->name('advertiser.dashboard');
-        
+
     //Publisher routes
     Route::get('/publisher', 'HomeController@publisher')->name('publisher.dashboard');
 });
 
 
+//Route for settings
+Route::get('settings', 'HomeController@settings');
+
+
+
+// Routes for publishers
 Route::group(['prefix' => 'p'], function () {
     //List all publisher sites
     Route::get('/sites', 'PublisherController@index')->name('publisher.sites');
@@ -54,6 +61,11 @@ Route::group(['prefix' => 'p'], function () {
     //Details for a specific publisher site
     Route::get('/site/{id}', 'PublisherController@site');
 
+    //create a new ad unit
+    Route::get('/newadunit/{id}', 'PublisherController@newadunit');
+
+    //Get a particular ad unit
+    Route::get('/adunit/{id}', 'PublisherController@adunit');
 });
 
 

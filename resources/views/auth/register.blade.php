@@ -15,7 +15,7 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                             <label for="firstname">First Name</label>
                             <br />

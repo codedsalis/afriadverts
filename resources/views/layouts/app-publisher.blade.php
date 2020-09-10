@@ -23,6 +23,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    {{-- Sweet alert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     {{-- Favicon --}}
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/ico">
 
@@ -55,7 +58,7 @@
                         @else
                             &#8358;
                         @endif
-                        {{ number_format(Auth::user()->publisher_earning, 2) }}
+                        {{ number_format(Auth::user()->publisher_balance, 2) }}
                     </b>
                 </button>
                 <a href="">

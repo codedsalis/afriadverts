@@ -10,32 +10,33 @@
           <div class="text-xs font-normal text-gray-600">
             Category: {{ site.category }}
             <b>&middot;</b>
-            Created <show-date :date-val="site.created_at"></show-date>
+            Created
+            <show-date :date-val="site.created_at"></show-date>
           </div>
           <span v-if="site.verified > 0">
-            <span class="bg-green-600 px-3 py-0 text-xs font-bold text-white rounded">Verified</span>
+            <span class="bg-green-600 px-3 py-0 text-xs font-bold text-white rounded">VERIFIED</span>
             <span
               v-if="site.approved > 0"
               class="bg-green-600 px-3 py-0 text-xs font-bold text-white rounded"
-            >Approved</span>
+            >APPROVED</span>
             <span
               v-else-if="site.approved < 0"
               class="bg-red-700 px-3 py-0 text-xs font-bold text-white rounded"
-            >Disapproved</span>
+            >DISAPPROVED</span>
             <span
               v-else
               class="bg-orange-400 px-3 py-0 text-xs font-bold text-white rounded"
-            >Pending Approval</span>
+            >PENDING APPROVAL</span>
           </span>
           <span
             v-else
             class="bg-orange-400 px-3 py-0 text-xs font-bold text-white rounded"
-          >Unverified</span>
+          >UNVERIFIED</span>
         </div>
         <div>
-          <a v-bind:href="'/p/site/' + site.id +'/newadunit'">
+          <a v-if="site.approved > 0" v-bind:href="'/p/newadunit/' + site.id">
             <button
-              class="px-4 py-2 bg-light-500 text-white text-sm border border-light-500 rounded-md hover:bg-light-700 focus:border-light-600 mt-2 shadow-md"
+              class="px-4 py-2 bg-light-500 text-white font-bold text-sm rounded-lg hover:bg-light-700 focus:border-light-600 mt-2 shadow-md focus:outline-none border-b-4 border-light-600 hover:border-aa-light-active"
             >
               <i class="fa fa-plus"></i> New Ad Unit
             </button>
@@ -82,16 +83,18 @@
         <br />
         <b>Verification Code:</b>
         <br />
-        <input
-          id="vCode"
-          type="text"
-          class="px-3 py-2 rounded-r-none rounded-l-md border-2 border-gray-400 focus:border-dark-800 w-4/6"
-          v-bind:value="site.verification_code"
-        />
-        <button
-          v-on:click="copy"
-          class="bg-aa-dark text-white border-2 border-aa-dark rounded-l-none rounded-r-md hover:bg-aa-darker hover:border-aa-darker px-3 py-2"
-        >Copy</button>
+        <div class="sm:w-full mx-4 md:w-4/5">
+          <div class="code">
+            <code
+              id="vCode"
+            >&lt;meta name="afri_verification" content="{{ site.pub_key }}"/&gt; &lt;script src="https://static.afriadverts.com/js/pubvfpv.js"&gt;&lt;/script&gt;&lt;script&gt;window.onload = function() { var url = "{{ site.url }}"; var pid = {{ user.id }}; var key = "{{ site.pub_key }}"; return renderPageViews({ url: url, pid: pid, key: key });};&lt;/script&gt;</code>
+          </div>
+          <button
+            class="bg-aa-dark py-2 px-3 rounded text-white float-right mt-1"
+            id="button1"
+            @click="copyToClipboard('vCode')"
+          >Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -109,7 +112,7 @@ Vue.use(VueNoty);
 import "vuejs-noty/dist/vuejs-noty.css";
 
 import AdUnits from "./AdUnits.vue";
-import ShowDate from '../ShowDate';
+import ShowDate from "../ShowDate";
 
 export default {
   props: ["user", "siteId"],
@@ -159,6 +162,50 @@ export default {
         });
       }
     },
+
+    copyToClipboard(containerid) {
+      if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select().createTextRange();
+        document.execCommand("copy");
+      } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        this.$noty.success("Verification code copied to clipboard", {
+          layout: "bottomRight",
+          theme: "nest",
+        });
+      }
+    },
   },
 };
 </script>
+
+<style>
+code {
+  font-family: monospace;
+  /* color: crimson; */
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+
+.code {
+  height: 70px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 5px;
+  background: #f1f1f1;
+  border: 2px solid;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+  border-radius: 5px;
+}
+
+.wrapper {
+  width: 80%;
+}
+</style>

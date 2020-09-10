@@ -39,13 +39,23 @@ class HomeController extends Controller
 
 
     /**
-    * Show the publisher dashboard
-    *
-    * @return \Illuminate\Contracts\Support\Renderable
-    */
+     * Show the publisher dashboard
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function advertiser()
     {
-    return view('dashboard.advertiser');
+        return view('dashboard.advertiser');
     }
 
+
+    /**
+     * User settings page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function settings()
+    {
+        return view('dashboard.settings');
+    }
 }

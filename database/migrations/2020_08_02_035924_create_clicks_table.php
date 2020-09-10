@@ -16,11 +16,11 @@ class CreateClicksTable extends Migration
         Schema::create('clicks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users'); //The publisher ID
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); //The publisher ID
             $table->integer('advert_id')->unsigned();
             $table->foreign('advert_id')->references('id')->on('adverts'); //The advert id
             $table->integer('advertiser_id')->unsigned();
-            $table->foreign('advertiser_id')->references('id')->on('users'); //The advertiser id
+            $table->foreign('advertiser_id')->references('id')->on('users')->onDelete('cascade'); //The advertiser id
             $table->integer('unit_id')->unsigned();
             $table->ipAddress('ip_address');
             $table->string('browser');

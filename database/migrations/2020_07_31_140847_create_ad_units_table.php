@@ -16,12 +16,11 @@ class CreateAdUnitsTable extends Migration
         Schema::create('ad_units', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('unit_title');
             $table->integer('site_id')->unsigned();
-            $table->foreign('site_id')->references('id')->on('sites');
+            $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
             $table->string('advert_type', 64);
-            $table->text('ad_code');
             $table->timestamps();
         });
     }

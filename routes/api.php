@@ -19,22 +19,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+//Settings Routes
+Route::group(['prefix' => 'settings'], function () {
+    //Account settings
+    Route::put('/account', 'Api\SettingsController@account');
+
+    //Password settings
+    Route::put('/password', 'Api\SettingsController@password');
+
+    //Payment settings
+    Route::put('/payment', 'Api\SettingsController@account');
+});
+
 
 //Site group routes for 'site/{abc}'
 Route::group(['prefix' => 'site'], function () {
     //Get site by id
     Route::get('/{id}', 'Api\SitesController@show');
-    
+
     //Get all Ad Units created for a site
     Route::get('/{id}/adunits', 'Api\SitesController@getadunits');
 
 
     //Delete a site
-    Route::delete('delete/{id}', 'Api\SitesController@destroy');
-    
+    Route::delete('/{id}', 'Api\SitesController@destroy');
+
     //Create a new site
     Route::post('/', 'Api\SitesController@store');
-    
+
     //Update a site
     Route::put('/', 'Api\SitesController@store');
 
@@ -42,7 +54,7 @@ Route::group(['prefix' => 'site'], function () {
 });
 
 //Get all sites created by a particular user
-Route::get('sites/user/{id}', 'Api\SitesController@usersites');
+Route::get('sites/{id}', 'Api\SitesController@usersites');
 
 //Get all sites
 Route::get('sites', 'Api\SitesController@index');
@@ -54,8 +66,11 @@ Route::get('sites', 'Api\SitesController@index');
 //Ad Unit group routes for adunit/{id}
 Route::group(['prefix' => 'adunit'], function () {
 
-    //Get a particular ad unit
+    //Get all ad units
     Route::get('/', 'Api\AdUnitsController@index');
+
+    //Get a particular ad unit
+    Route::get('/{id}', 'Api\AdUnitsController@show');
 
     //create new ad unit
     Route::post('/', 'Api\AdUnitsController@store');
@@ -64,6 +79,5 @@ Route::group(['prefix' => 'adunit'], function () {
     Route::put('/', 'Api\AdUnitsController@store');
 
     //Delete Ad Unit
-    Route::delete('/', 'Api\AdUnitsController@destroy');
+    Route::delete('/{id}', 'Api\AdUnitsController@destroy');
 });
-

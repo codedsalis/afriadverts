@@ -40,7 +40,7 @@ class SitesController extends Controller
             'userId' => 'required|exists:users,id'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json([
                 $validator->errors()
             ], 403);
@@ -54,9 +54,8 @@ class SitesController extends Controller
         $site->category = $request->input('category');
         $site->user_id = $request->input('userId');
         $site->pub_key = 'site-' . \md5($site->url);
-        $site->verification_code = '<meta name="aa_verification" content="' . $site->pub_key . '"/><script src="https://static.afriadverts.com/js/pubvfpv.js"></script><script>window.onload = function(){var url = ' . $request->url . ';var pid = ' . $request->input('userId') . ';var key = ' . $site->pub_key . ';return renderPageViews({url: url,pid: pid,key: key});};</script>';
 
-        if($site->save()) {
+        if ($site->save()) {
             return new SiteResource($site);
         }
     }
@@ -87,7 +86,7 @@ class SitesController extends Controller
         //Get the site Id
         $site = Site::findOrFail($id);
 
-        if($site->delete()) {
+        if ($site->delete()) {
             return new SiteResource($site);
         }
     }
@@ -100,56 +99,63 @@ class SitesController extends Controller
      * @param \Request $request
      * @return \Illuminate\Http\Response
      */
-    public function usersites($id, Request $request)
+    public function usersites($id)
     {
         //
-        if($request->_intent === 'paginate') {
-            $sites = DB::table('sites')
-                        ->select('*')
-                        ->where('user_id', '=', $id)
-                        ->paginate(15);
-        } elseif($request->_intent === 'limit') {
-            //For getting the limit value, hence the take query must accompany the _intent=limit query
-            //ie ?_intent=limit&take=7
+        // if ($request->_intent === 'paginate') {
+        //     $sites = DB::table('sites')
+        //         ->select('*')
+        //         ->where('user_id', '=', $id)
+        //         ->orderBy('created_at', 'desc')
+        //         ->paginate(1);
+        // } elseif ($request->_intent === 'limit') {
+        //     //For getting the limit value, hence the take query must accompany the _intent=limit query
+        //     //ie ?_intent=limit&take=7
 
-            //Let's test for the availability for the take query string
-            //If it's not found, we return an error message
-            if(! $request->has('take')) {
-                return response()->json([
-                    'error' => 1,
-                    'message' => 'Bad request!'
-                ], 400);
-            }
-            $take = $request->take;
-            
-            //Get the sites limited as requested
-            $sites = DB::table('sites')
-                            ->select('*')
-                            ->where('user_id', '=', $id)
-                            ->limit($take)->get();
-        } elseif($request->_intent === 'count') {
-            //If the intent is 'count' then we return the total counted rows
-            $count = DB::table('sites')
-                            ->select('*')
-                            ->where('user_id', '=', $id)
-                            ->count();
-            return response()->json([
-                'total' => $count,
-            ], 200);
-        } else {
-            //If no condition is specified, return all the sites
-            $sites = DB::table('sites')
-                            ->select('*')
-                            ->where('user_id', '=', $id)
-                            ->get();
-        }
+        //     //Let's test for the availability for the take query string
+        //     //If it's not found, we return an error message
+        //     if (!$request->has('take')) {
+        //         return response()->json([
+        //             'error' => 1,
+        //             'message' => 'Bad request!'
+        //         ], 400);
+        //     }
+        //     $take = $request->take;
+
+        //     //Get the sites limited as requested
+        //     $sites = DB::table('sites')
+        //         ->select('*')
+        //         ->where('user_id', '=', $id)
+        //         ->limit($take)->get();
+        // } elseif ($request->_intent === 'count') {
+        //     //If the intent is 'count' then we return the total counted rows
+        //     $count = DB::table('sites')
+        //         ->select('*')
+        //         ->where('user_id', '=', $id)
+        //         ->count();
+        //     return response()->json([
+        //         'total' => $count,
+        //     ], 200);
+        // } else {
+        //     //If no condition is specified, return all the sites
+        //     $sites = DB::table('sites')
+        //         ->select('*')
+        //         ->where('user_id', '=', $id)
+        //         ->get();
+        // }
+
+        $sites = DB::table('sites')
+            ->select('*')
+            ->where('user_id', '=', $id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         //Return a resource of user sites
         return new SiteResource($sites);
     }
 
 
-        /**
+    /**
      * Get all sites created by a particular user with the different given conditions
      * 
      * @param int $id
@@ -159,10 +165,10 @@ class SitesController extends Controller
     public function getadunits($id, Request $request)
     {
         $adUnits = DB::table('ad_units')
-                        ->select('*')
-                        ->where('site_id', '=', $id)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(15);
+            ->select('*')
+            ->where('site_id', '=', $id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
 
         //return a resource of the ad units
         return new AdunitResource($adUnits);

@@ -21,7 +21,7 @@
             <select
               id="category"
               v-model="site.category"
-              class="rounded p-2 border border-gray-400 text-black w-full"
+              class="bg-white rounded p-3 border-2 border-gray-400 text-black w-full"
             >
               <option value="General">General</option>
               <option value="Technology">Technology</option>
@@ -49,7 +49,7 @@
           <div>
             <button
               type="submit"
-              class="animation transform bg-aa-dark px-10 duration-500 py-3 text-white float-right hover:scale-200 hover:bg-aa-darker rounded-full mt-2"
+              class="animation transform bg-aa-dark px-10 duration-500 py-3 text-white float-right hover:scale-200 hover:bg-aa-darker rounded-full mt-4"
             >Submit</button>
           </div>
         </div>
@@ -60,8 +60,10 @@
 
 <script>
 import axios from "axios";
+
 // Import component
 import Loading from "vue-loading-overlay";
+
 // Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
 
@@ -110,15 +112,15 @@ export default {
           setTimeout(() => {
             this.isLoading = false;
             this.$noty.success(
-              'Site added successfully<br/><a href="/p/site/' +
+              'Site added successfully<br/><br/><a href="/p/site/' +
                 response.data.data.id +
-                '"><button class="bg-white text-gray-700 px-5 py-2 rounded hover:bg-gray-400">View site</button></a>',
+                '"><button class="bg-dark-500 text-gray-100 px-5 py-2 font-bold rounded hover:bg-dark-800">View</button></a>',
               {
-                layout: "topCenter",
-                theme: "relax",
+                layout: "topRight",
+                theme: "metroui",
               }
             );
-          }, 1000);
+          }, 500);
         })
         .catch((error) => {
           this.isLoading = false;

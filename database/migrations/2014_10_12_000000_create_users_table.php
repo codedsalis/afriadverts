@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 256)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 256);
+            $table->string('last_dashboard', 15)->nullable();
             $table->integer('publisher_balance')->unsigned()->default(0);
             $table->integer('advertiser_balance')->unsigned()->default(0);
             $table->ipAddress('ip_address');

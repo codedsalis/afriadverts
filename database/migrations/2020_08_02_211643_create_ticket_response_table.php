@@ -16,9 +16,9 @@ class CreateTicketResponseTable extends Migration
         Schema::create('ticket_response', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('ticket_id')->unsigned();
-            $table->foreign('ticket_id')->references('id')->on('support_tickets');
+            $table->foreign('ticket_id')->references('id')->on('support_tickets')->onDelete('cascade');
             $table->text('message');
             $table->boolean('read');
             $table->timestamps();
