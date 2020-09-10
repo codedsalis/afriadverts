@@ -13,6 +13,7 @@
             v-model="user.first_name"
             placeholder="Enter first name"
             autofocus
+            required
           />
           <br />
           <div

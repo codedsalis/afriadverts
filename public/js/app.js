@@ -2545,6 +2545,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
  // not required. Styles for built-in spinner
 
@@ -5938,7 +5939,8 @@ var render = function() {
                   id: "first_name",
                   type: "text",
                   placeholder: "Enter first name",
-                  autofocus: ""
+                  autofocus: "",
+                  required: ""
                 },
                 domProps: { value: _vm.user.first_name },
                 on: {
