@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -25,7 +25,7 @@ class AdminLoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         //Define login credentials
         $credentials = [
             'email' => $request->email,
@@ -33,7 +33,7 @@ class AdminLoginController extends Controller
         ];
 
         //Attempt to log the user in
-        if(Auth::guard('admin')->attempt($credentials, $request->remember)) {
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
             //If successful, redirect to the intended destination
             return redirect()->intended(route('admin.dashboard'));
         }

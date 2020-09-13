@@ -28,7 +28,7 @@ Route::group(['prefix' => 'settings'], function () {
     Route::put('/password', 'Api\SettingsController@password');
 
     //Payment settings
-    Route::put('/payment', 'Api\SettingsController@account');
+    Route::put('/payment', 'Api\SettingsController@payment');
 });
 
 

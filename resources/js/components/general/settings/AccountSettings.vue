@@ -19,7 +19,7 @@
           <div
             v-for="firstNameError in error.first_name"
             v-bind:key="firstNameError"
-            class="text-red-700"
+            class="text-red-700 animate__animated animate__bounce animate__delay-2s"
           >{{ firstNameError }}</div>
         </div>
 
@@ -118,9 +118,6 @@ import axios from "axios";
 
 import SubmitButton from "../../SubmitButton.vue";
 
-// not required. Styles for built-in spinner
-import "vue-promise-btn/dist/vue-promise-btn.css";
-
 //Import Noty for notifications
 import VueNoty from "vuejs-noty";
 
@@ -152,7 +149,7 @@ export default {
     saveChanges() {
       this.isLoading = true;
       axios
-        .put(`/api/settings/account`, {
+        .put("/api/settings/account", {
           userId: this.user.id,
           first_name: this.user.first_name,
           last_name: this.user.last_name,

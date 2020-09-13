@@ -22,6 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     {{-- Sweet alert --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -51,7 +52,7 @@
             </div>
             <div>
                 <button
-                    class="animation bg-transparent text-gray-700 text-xl rounded-full px-3 py-2 mt-2 hover:bg-gray-300 hover:scale-105">
+                    class="animation bg-transparent text-gray-700 text-xl rounded-full px-3 py-2 mt-2 hover:bg-gray-300 hover:scale-105 focus:outline-none">
                     <b>
                         @if (Auth::user()->currency === 'USD')
                             $

@@ -20,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('email', 256)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 256);
+            $table->string('account_name', 200)->nullable();
+            $table->string('bank_name', 100)->nullable();
+            $table->string('account_number', 15)->nullable();
+            $table->string('paypal_email', 200)->nullable();
             $table->string('last_dashboard', 15)->nullable();
             $table->integer('publisher_balance')->unsigned()->default(0);
             $table->integer('advertiser_balance')->unsigned()->default(0);

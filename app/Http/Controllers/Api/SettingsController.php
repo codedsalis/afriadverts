@@ -7,29 +7,10 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store updated user info resource in storage.
      *
@@ -72,47 +53,119 @@ class SettingsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Update the user password
      *
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function password(Request $request)
     {
-        //
+        //Validate
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'userId' => 'required|numeric',
+                'password' => 'required|confirmed|string|max:255',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                $validator->errors()
+            ], 403);
+        }
+
+        //Check for the provided user id
+        $user = User::findOrFail(strip_tags($request->userId));
+
+        // lets collect data and save
+        $user->password = Hash::make($request->password);
+
+        // Save
+        if ($user->save()) {
+            return response()->json([
+                "success" => "Password successfully changed",
+            ], 200);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
+     * Store updated payment info resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function payment(Request $request)
     {
-        //
-    }
+        //Validate
+        if ($request->payment_method === 'bank') {
+            //Validate bank request only
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'payment_method' => 'required|string',
+                    'user_id' => 'required|numeric',
+                    'bank_name' => 'required|string|max:100',
+                    'account_name' => 'required|string|max:200',
+                    'account_number' => 'string|max:15',
+                ]
+            );
+        } elseif ($request->payment_method === 'paypal') {
+            // If it is paypal, validate only paypal request
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'payment_method' => 'required|string',
+                    'user_id' => 'required|numeric',
+                    'paypal_email' => 'string|max:200',
+                ]
+            );
+        } else {
+            // Otherwise return an error message
+            return response()->json([
+                "error" => "Unknown request type",
+            ], 403);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+        if ($validator->fails()) {
+            return response()->json([
+                $validator->errors()
+            ], 403);
+        }
+
+        //Check for the provided user id
+        $user = User::findOrFail(strip_tags($request->user_id));
+
+        //Accepted payment methods
+        $acceptedPayment = [
+            'bank',
+            'paypal',
+        ];
+
+        //Check if the $request->payment_method gives a value other than 'bank' and 'paypal'
+        if (!in_array($request->payment_method, $acceptedPayment)) {
+            return response()->json([
+                "error" => [
+                    "payment_method" => "The supplied payment method is not recognised"
+                ]
+            ], 403);
+        }
+
+
+        // lets collect data and save based on the provided payment method
+        if ($request->payment_method === 'bank') {
+            $user->bank_name = $request->bank_name;
+            $user->account_name = $request->account_name;
+            $user->account_number = $request->account_number;
+        } elseif ($request->payment_method === 'paypal') {
+            $user->paypal_email = $request->paypal_email;
+        }
+
+        // Save
+        if ($user->save()) {
+            return new UserResource($user);
+        }
     }
 }
