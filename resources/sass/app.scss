@@ -2,18 +2,6 @@
 
 @tailwind components;
 
-.btn-dark {
-    @apply transition duration-700 ease-in-out bg-aa-dark text-white rounded-full p-3;
-}
-
-.btn-light {
-    @apply transition duration-700 ease-in-out bg-aa-light text-white rounded-full p-3;
-}
-
-.animation {
-    @apply transform transition-all duration-500;
-}
-
 .center {
     display: flex;
     justify-content: center;
@@ -76,20 +64,168 @@
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
-    }
-    
-    ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background: #f5f5f5;
     border-radius: 10px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #ccc;  
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
+    background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: #999;
+}
+
+
+// Begin breadcrumbs styles
+.breadcrumb-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+}
+
+.breadcrumb {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: auto;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    height: 57px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    box-shadow: 0 1px 1px rgba(59, 58, 58, 0.7), 0 4px 4px rgba(88, 85, 85, 0.7);
+    z-index: 1;
+    background-color: #cbd5e0;
+    border: 0px solid transparent;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    text-decoration: none;
+    margin: auto;
+    height: 100%;
+    padding-left: 38px;
+    padding-right: 0;
+    color: #2c3e50;
+}
+
+.breadcrumb a:first-child {
+    padding-left: 15.2px;
+}
+
+.breadcrumb a:last-child {
+    padding-right: 15.2px;
+}
+
+.breadcrumb a:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 57px;
+    height: 57px;
+    top: 0;
+    right: -28.14815px;
+    background-color: #cbd5e0;
+    border-top-right-radius: 5px;
+    -webkit-transform: scale(0.707) rotate(45deg);
+    transform: scale(0.707) rotate(45deg);
+    box-shadow: 1px -1px rgba(82, 78, 78, 0.25);
+    z-index: 1;
+}
+
+.breadcrumb a:last-child:after {
+    content: none;
+}
+
+.breadcrumb__inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin: auto;
+    z-index: 2;
+}
+
+.breadcrumb__title {
+    font-weight: bold;
+}
+
+.breadcrumb a.active {
+    background: #fff;
+    color: #2c3e50;
+}
+
+.breadcrumb a:hover {
+    background: #fff;
+    color: #2c3e50;
+}
+
+.breadcrumb a:hover:after {
+    background: #fff;
+    color: white;
+}
+
+.breadcrumb a.active:after {
+    background: #fff;
+}
+
+.breadcrumb a.active:hover:after {
+    background: #fff;
+}
+
+@media all and (max-width: 1000px) {
+    .breadcrumb {
+        font-size: 12px;
     }
+}
+
+@media all and (max-width: 710px) {
+    .breadcrumb__desc {
+        display: none;
+    }
+
+    .breadcrumb {
+        height: 38px;
+        border: 0px solid transparent;
+    }
+
+    .breadcrumb a {
+        padding-left: 25.33333px;
+    }
+
+    .breadcrumb a:after {
+        content: "";
+        width: 38px;
+        height: 38px;
+        right: -19px;
+        -webkit-transform: scale(0.707) rotate(45deg);
+        transform: scale(0.707) rotate(45deg);
+    }
+}
+
+//   End of breadcrumbs styles
 
 @tailwind utilities;

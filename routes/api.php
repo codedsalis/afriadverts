@@ -19,6 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+//Notifications route
+Route::group(['prefix' => 'notifications'], function () {
+    //Get user notifications
+    Route::get('/', 'Api\NotificationsController@index');
+
+    //Mark user notifications read
+    Route::post('/', 'Api\NotificationsController@markread');
+});
+
+// Route to delete notification
+Route::delete('notification/{id}', 'Api\NotificationsController@destroy');
+
+
 //Settings Routes
 Route::group(['prefix' => 'settings'], function () {
     //Account settings
@@ -80,4 +93,9 @@ Route::group(['prefix' => 'adunit'], function () {
 
     //Delete Ad Unit
     Route::delete('/{id}', 'Api\AdUnitsController@destroy');
+});
+
+
+Route::group(['prefix' => 'adverts'], function () {
+    Route::post('/adsetup', 'Api\AdvertsController@adsetup');
 });

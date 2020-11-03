@@ -34,19 +34,23 @@ Route::group(['prefix' => 'admin'], function () {
 
 //Routes for Dashboards
 Route::group(['prefix' => 'dashboard'], function () {
+
     //For User who has not chosen what to do yet and for switching the different dashboards
     Route::get('/overview', 'HomeController@index')->name('home');
 
-    //Advertiser routes
+    //Advertiser dashboard
     Route::get('/advertiser', 'HomeController@advertiser')->name('advertiser.dashboard');
 
-    //Publisher routes
+    //Publisher dashboard
     Route::get('/publisher', 'HomeController@publisher')->name('publisher.dashboard');
 });
 
 
 //Route for settings
 Route::get('settings', 'HomeController@settings');
+
+//Route for notifications
+Route::get('notifications', 'HomeController@notifications');
 
 
 
@@ -66,6 +70,16 @@ Route::group(['prefix' => 'p'], function () {
 
     //Get a particular ad unit
     Route::get('/adunit/{id}', 'PublisherController@adunit');
+});
+
+// Routes for advertisers
+Route::group(['prefix' => 'a'], function () {
+    
+    // New advert
+    Route::get('/newadvert', 'AdvertiserController@newadvert');
+
+    // Advert setup
+    Route::get('/adsetup', 'AdvertiserController@adsetup');
 });
 
 

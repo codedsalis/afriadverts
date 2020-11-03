@@ -6,31 +6,49 @@
     <!-- Begin no ad units found -->
     <div v-if="adunits.total < 1">
       <div class="flex center flex-col justify-center">
-        <div class="text-center" style="font-size: 50px;">😑</div>
-        <div
-          class="text-center text-2xl"
-        >You do not have any Ad units to display. Click on the New ad unit button to create one</div>
+        <div class="text-center" style="font-size: 50px">😑</div>
+        <div class="text-center text-2xl">
+          You do not have any Ad units to display. Click on the New ad unit
+          button to create one
+        </div>
       </div>
     </div>
     <!-- End no ad units found -->
 
-    <div v-else class="text-2xl font-semibold mb-0">{{ adunits.total }}/3 Ad Unit(s)</div>
-    <div class="mb-2">
-      <i class="fa fa-lightbulb-o text-aa-light"></i>
-      A site may not have more than a maximum of
-      <b>three(3)</b> Ad units
+    <div v-if="adunits.total > 0">
+      <div class="text-2xl font-semibold mb-0">
+        {{ adunits.total }}/3 Ad Unit(s)
+      </div>
+      <div class="mb-2">
+        <i class="fa fa-lightbulb-o text-aa-light"></i>
+        A site may not have more than a maximum of
+        <b>three(3)</b> Ad units
+      </div>
     </div>
 
-    <div class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md">
+    <div
+      v-if="adunits.total > 0"
+      class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md"
+    >
       <div class="overflow-x-scroll w-full">
-        <table v-if="adunits.total > 0" class="w-full table-auto border-collapse overflow-scroll">
+        <table class="w-full table-auto border-collapse overflow-scroll">
           <thead>
             <tr>
-              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">ID</th>
-              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">Title</th>
-              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">Ad type</th>
-              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">Created</th>
-              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">Actions</th>
+              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">
+                ID
+              </th>
+              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">
+                Title
+              </th>
+              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">
+                Ad type
+              </th>
+              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">
+                Created
+              </th>
+              <th class="px-4 py-2 text-gray-800 text-left font-bold text-lg">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -40,7 +58,8 @@
                 <a
                   :href="'/p/adunit/' + unit.id"
                   class="text-aa-light hover:text-aa-light-active"
-                >{{ unit.unit_title }}</a>
+                  >{{ unit.unit_title }}</a
+                >
               </td>
               <td class="px-4 py-2 text-black">{{ unit.advert_type }}</td>
               <td class="px-4 py-2 text-black">
@@ -49,7 +68,8 @@
               <td>
                 <a href class="text-aa-light hover:text-aa-light-active">
                   <i class="fa fa-pie-chart"></i> Statistics
-                </a> &#160;&#160;&#160;
+                </a>
+                &#160;&#160;&#160;
                 <a
                   @click="deleteAdUnit(unit.id)"
                   class="text-red-700 hover:text-red-900"

@@ -1,6 +1,10 @@
 module.exports = {
     purge: [],
     theme: {
+        fontFamily: {
+            'roboto': ['roboto', 'sans-serif'],
+        },
+
         extend: {
             colors: {
                 'aa-light': '#b45f06',
@@ -19,6 +23,13 @@ module.exports = {
                     700: "#6c3904",
                     800: "#482602",
                     900: "#241301"
+                },
+
+                link: {
+                    100: "#0076FF",
+                    200: "#376bdb",
+                    300: "#2756ba",
+                    400: "#368bda",
                 },
 
                 dark: {

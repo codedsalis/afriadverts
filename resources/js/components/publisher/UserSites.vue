@@ -1,6 +1,10 @@
 <template>
   <div class="vld-parent">
-    <loading :active.sync="isLoading" :can-cancel="false" :is-full-page="fullPage"></loading>
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="fullPage"
+    ></loading>
 
     <div class="flex justify-between">
       <div class="text-2xl md:text-3xl font-bold text-gray-900">My sites</div>
@@ -17,26 +21,35 @@
     <!-- Begin no sites found -->
     <div v-if="sitesMeta.total < 1">
       <div class="flex center flex-col justify-center">
-        <div class="text-center" style="font-size: 50px;">😑</div>
-        <div
-          class="text-center text-2xl"
-        >You do not have any sites to display. Click on the New site button to create one</div>
+        <div class="text-center" style="font-size: 50px">😑</div>
+        <div class="text-center text-2xl">
+          You do not have any sites to display. Click on the New site button to
+          create one
+        </div>
       </div>
     </div>
     <!-- End no sites found -->
 
     <!-- Begin sites -->
     <div v-else>
-      <div class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md">
+      <div
+        class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md"
+      >
         <div class="overflow-x-scroll w-full">
           <table class="table table-auto border-collapse">
             <thead>
               <tr>
                 <th class="px-4 py-2 text-gray-800 font-bold text-lg">URL</th>
                 <th class="px-4 py-2 text-gray-800 font-bold text-lg">ID</th>
-                <th class="px-4 py-2 text-gray-800 font-bold text-lg">Category</th>
-                <th class="px-4 py-2 text-gray-800 font-bold text-lg">Status</th>
-                <th class="px-4 py-2 text-gray-800 font-bold text-lg">Created</th>
+                <th class="px-4 py-2 text-gray-800 font-bold text-lg">
+                  Category
+                </th>
+                <th class="px-4 py-2 text-gray-800 font-bold text-lg">
+                  Status
+                </th>
+                <th class="px-4 py-2 text-gray-800 font-bold text-lg">
+                  Created
+                </th>
                 <th class="px-4 py-2 text-gray-800 font-bold text-lg">
                   <i class="fa fa-pie-chart"></i>
                 </th>
@@ -54,30 +67,38 @@
                   <a
                     :href="`/p/site/${site.id}`"
                     class="text-aa-light hover:text-aa-light-active"
-                  >{{ site.url }}</a>
+                    >{{ site.url }}</a
+                  >
                 </td>
                 <td class="px-4 py-2 text-black">{{ site.id }}</td>
                 <td class="px-4 py-2 text-black">{{ site.category }}</td>
                 <td class="px-4 py-2 text-black">
                   <span v-if="site.verified > 0">
-                    <span class="bg-green-600 rounded text-xs font-bold px-2 text-white">VERIFIED</span>
+                    <span
+                      class="bg-green-600 rounded text-xs font-bold px-2 text-white"
+                      >VERIFIED</span
+                    >
                     <span
                       v-if="site.approved > 0"
                       class="bg-green-600 rounded text-xs font-bold px-2 text-white"
-                    >APPROVED</span>
+                      >APPROVED</span
+                    >
                     <span
                       v-else-if="site.approved === 0"
                       class="bg-orange-400 rounded text-xs font-bold px-2 text-white"
-                    >PENDING APPROVAL</span>
+                      >PENDING APPROVAL</span
+                    >
                     <span
                       v-else
                       class="bg-red-700 rounded text-xs font-bold px-2 text-white"
-                    >DISAPPROVED</span>
+                      >DISAPPROVED</span
+                    >
                   </span>
                   <span
                     v-if="site.verified === 0"
                     class="bg-orange-400 rounded text-xs font-bold px-2 text-white"
-                  >UNVERIFIED</span>
+                    >UNVERIFIED</span
+                  >
                 </td>
                 <td class="px-4 py-2 text-black">
                   <show-date :date-val="site.created_at"></show-date>
@@ -86,19 +107,23 @@
                   <a
                     :href="`/p/site/${site.id}/statistics`"
                     class="text-aa-light hover:text-aa-light-active"
-                  >Statistics</a>
+                    >Statistics</a
+                  >
                 </td>
                 <td class="px-4 py-2 text-black">
                   <a
                     :href="`/p/newadunit/${site.id}`"
                     class="text-aa-light hover:text-aa-light-active"
-                  >New ad unit</a>
+                    >New ad unit</a
+                  >
                 </td>
                 <td class="px-4 py-2 text-black">
                   <button
                     v-on:click="deleteSite(site.id)"
                     class="bg-red-700 focus:outline-none text-white px-2 py-1 rounded-md hover:bg-red-900"
-                  >Delete</button>
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -110,18 +135,24 @@
       <div v-if="sitesMeta.total > 10">
         <div class="flex justify-center">
           <button
-            v-bind:class="[{'cursor-not-allowed': !pagination.prev_page_url}]"
+            v-bind:class="[{ 'cursor-not-allowed': !pagination.prev_page_url }]"
             class="bg-white text-aa-dark border border-aa-light rounded-md px-5 py-2"
             @click="fetchSites(pagination.prev_page_url)"
-          >Previous</button>
+          >
+            Previous
+          </button>
           <div
             class="flex-2 bg-white text-aa-dark border border-gray-400 px-5 py-2"
-          >Page {{ pagination.current_page }} of {{ pagination.last_page }}</div>
+          >
+            Page {{ pagination.current_page }} of {{ pagination.last_page }}
+          </div>
           <button
-            v-bind:class="[{'cursor-not-allowed': !pagination.next_page_url}]"
+            v-bind:class="[{ 'cursor-not-allowed': !pagination.next_page_url }]"
             class="bg-white text-aa-dark border border-aa-light rounded-md px-5 py-2"
             @click="fetchSites(pagination.next_page_url)"
-          >Next</button>
+          >
+            Next
+          </button>
         </div>
       </div>
       <!-- End pagination -->
@@ -178,7 +209,7 @@ export default {
 
     fetchSites(pageUrl) {
       let vm = this;
-      pageUrl = pageUrl || `/api/sites/${this.user.id}`;
+      pageUrl = pageUrl || `${this.$root.$data.api}/sites/${this.user.id}`;
       this.isLoading = true;
       axios
         .get(pageUrl)

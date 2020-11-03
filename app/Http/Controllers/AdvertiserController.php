@@ -22,4 +22,16 @@ class AdvertiserController extends Controller
     public function index() {
         return view('dashboard.advertiser');
     }
+
+    // Start a new advert
+    public function newadvert() {
+        return view('advertiser.newadvert');
+    }
+
+
+    // Setup the advert
+    public function adsetup(Request $request) {
+        $intent = $request->intent;
+        return view('advertiser.adsetup')->with('intent', $intent);
+    }
 }

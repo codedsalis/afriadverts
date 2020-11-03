@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mx-auto">
-        <header class="text-4xl md:text-5xl font-black text-aa-darker text-center p-2">
+        <header class="text-4xl md:text-6xl font-black text-aa-darker text-center p-2">
             Welcome {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
         </header>
         <p class="text-3xl text-center">

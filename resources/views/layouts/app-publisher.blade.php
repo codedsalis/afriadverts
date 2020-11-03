@@ -22,7 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     {{-- Sweet alert --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -36,9 +36,9 @@
 
 </head>
 
-<body class="bg-gray-200 overflow-y-hidden">
+<body class="bg-gray-200 overflow-y-hidden font-roboto">
     <div id="app">
-        {{-- <nav-bar></nav-bar> --}}
+        <nav-bar></nav-bar>
         <nav class="flex bg-white text-aa-dark shadow-md sticky justify-between px-6 h-16">
             <div class="flex items-center">
                 <button class="md:hidden mr-2" aria-label="Open Menu" onclick="drawer()">

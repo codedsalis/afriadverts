@@ -1,12 +1,12 @@
 <template>
   <button
     type="submit"
-    v-bind:class="{'cursor-not-allowed opacity-75 text-gray-300': loading}"
-    class="bg-aa-dark rounded-md text-white font-bold px-5 py-2 hover:bg-aa-darker focus:outline-none border-b-4 border-aa-darker hover:border-dark-900"
+    v-bind:class="{ 'cursor-not-allowed opacity-75 text-gray-300': loading }"
+    class="bg-aa-light rounded-md text-white font-bold py-3 px-5 hover:bg-light-700 focus:outline-none border border-aa-light hover:border-light-700"
   >
     <div class="flex">
       <div class="px-1">
-        <div v-bind:class="{'spinner': loading}"></div>
+        <div v-bind:class="{ spinner: loading }"></div>
       </div>
       <div>
         <slot>Submit</slot>

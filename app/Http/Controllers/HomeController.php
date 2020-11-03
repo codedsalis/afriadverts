@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Advert;
 
 class HomeController extends Controller
 {
@@ -45,7 +47,9 @@ class HomeController extends Controller
      */
     public function advertiser()
     {
-        return view('dashboard.advertiser');
+        // Get the number of adverts a user has created
+        $adsCount = Advert::where('user_id', Auth::user()->id)->count();
+        return view('dashboard.advertiser')->with('adsCount', $adsCount);
     }
 
 
@@ -57,5 +61,16 @@ class HomeController extends Controller
     public function settings()
     {
         return view('dashboard.settings');
+    }
+
+
+    /**
+     * Notifications page
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function notifications()
+    {
+        return view('dashboard.notifications');
     }
 }
