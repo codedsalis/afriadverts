@@ -14,7 +14,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/afriadverts.js') }}" defer></script>
+    <script src="{{ asset('js/afriadverts.js') }}"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     {{-- Sweet alert --}}
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     {{-- Favicon --}}
     <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/ico">
@@ -36,7 +37,7 @@
 
 </head>
 
-<body class="bg-gray-200 overflow-y-hidden font-roboto">
+<body class="bg-gray-100 overflow-y-hidden font-roboto">
     <div id="app">
         {{-- <nav-bar></nav-bar> --}}
         <nav class="flex bg-white text-aa-dark shadow-md sticky justify-between px-6 h-16">
@@ -51,17 +52,13 @@
                 <b class="h-100 font-bold text-2xl italic">Pub</b>
             </div>
             <div>
-                <button
-                    class="animation bg-transparent text-gray-700 text-xl rounded-full px-3 py-2 mt-2 hover:bg-gray-300 hover:scale-105 focus:outline-none">
-                    <b>
-                        @if (Auth::user()->currency === 'USD')
-                            $
-                        @else
-                            &#8358;
-                        @endif
-                        {{ number_format(Auth::user()->advertiser_balance, 2) }}
-                    </b>
-                </button>
+                <a href="/a/account?vsr={{ $Afriadverts->randomStrings(52) }}"><button
+                        class="animation bg-transparent text-link-100 text-xl border border-link-100 rounded-full px-3 py-2 mt-2 hover:bg-gray-300 hover:scale-105 focus:outline-none">
+                        <b>
+                            {{ $Afriadverts->showMoney(Auth::user()->advertiser_balance, Auth::user()->currency) }}
+                        </b>
+                    </button>
+                </a>
                 <a href="">
                     <button
                         class="sm:hidden animation bg-transparent rounded-full px-3 py-2 hover:bg-gray-300 hover:scale-110">
@@ -83,7 +80,7 @@
         </nav>
 
         <div class="flex h-screen">
-            <div class="bg-gray-100 w-0 md:w-1/5 invisible md:visible overflow-auto text-black p-0">
+            <div class="bg-gray-200 w-0 md:w-1/5 invisible md:visible overflow-auto text-black p-0">
                 <div class="p-3 font-bold text-2xl text-aa-dark">
                     {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                 </div>
@@ -113,6 +110,7 @@
             </div>
         </div>
     </div>
+    @yield('script')
 </body>
 
 </html>

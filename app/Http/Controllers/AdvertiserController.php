@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Library\Afriadverts;
+use App\Models\Advert;
 
 class AdvertiserController extends Controller
 {
@@ -33,5 +35,22 @@ class AdvertiserController extends Controller
     public function adsetup(Request $request) {
         $intent = $request->intent;
         return view('advertiser.adsetup')->with('intent', $intent);
+    }
+
+
+
+    // Advertiser account
+    public function account() {
+        $Afriadverts = new Afriadverts;
+        
+        return view('advertiser.account')->with(['Afriadverts' => $Afriadverts]);
+    }
+
+
+    // View ad info and stats
+    public function adinfo($id) {
+        $advert = Advert::findOrFail($id);
+
+        return view('advertiser.adinfo')->with('adinfo', $advert);
     }
 }

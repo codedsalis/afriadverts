@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="bg-gray-200 overflow-y-hidden font-roboto">
+<body class="bg-gray-100 overflow-y-hidden font-roboto">
     <div id="app">
         <nav-bar></nav-bar>
         <nav class="flex bg-white text-aa-dark shadow-md sticky justify-between px-6 h-16">
@@ -84,7 +84,7 @@
         </nav>
 
         <div class="flex h-screen">
-            <div class="bg-gray-100 w-0 md:w-1/5 invisible md:visible overflow-auto text-black p-0 md:p-2">
+            <div class="bg-gray-200 w-0 md:w-1/5 invisible md:visible overflow-auto text-black p-0 md:p-2">
                 {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                 <br />
                 <br />

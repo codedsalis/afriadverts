@@ -66,7 +66,7 @@
                 <td class="px-4 py-2 text-black">
                   <a
                     :href="`/p/site/${site.id}`"
-                    class="text-aa-light hover:text-aa-light-active"
+                    class="text-link-400 hover:text-link-500"
                     >{{ site.url }}</a
                   >
                 </td>
@@ -106,14 +106,14 @@
                 <td class="px-4 py-2 text-black">
                   <a
                     :href="`/p/site/${site.id}/statistics`"
-                    class="text-aa-light hover:text-aa-light-active"
+                    class="text-link-400 hover:text-link-500"
                     >Statistics</a
                   >
                 </td>
                 <td class="px-4 py-2 text-black">
                   <a
                     :href="`/p/newadunit/${site.id}`"
-                    class="text-aa-light hover:text-aa-light-active"
+                    class="text-link-400 hover:text-link-500"
                     >New ad unit</a
                   >
                 </td>

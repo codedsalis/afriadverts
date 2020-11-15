@@ -80,6 +80,13 @@ Route::group(['prefix' => 'a'], function () {
 
     // Advert setup
     Route::get('/adsetup', 'AdvertiserController@adsetup');
+
+    // Fund account
+    Route::get('/account', 'AdvertiserController@account');
+
+    // View ad info and stats
+    Route::get('/adinfo/{id}', 'AdvertiserController@adinfo');
+
 });
 
 
@@ -88,3 +95,11 @@ Route::group(['prefix' => 'a'], function () {
 
 // //Create new publisher sites
 // Route::get('site/new', 'SitesController@new');
+
+
+
+// Payment Routes
+Route::post('pay', 'PaymentController@redirectToGateway')->name('pay');
+
+// Payment callback route
+Route::get('payment/callback', 'PaymentController@handleGatewayCallback');

@@ -3609,7 +3609,6 @@ Vue.use(vuejs_noty__WEBPACK_IMPORTED_MODULE_3___default.a); //Import noty styles
 
             if (doc.value == "") {
               doc.classList.add("border-red-600");
-              document.querySelector("#error-" + stepOne[i]).innerHTML = "Please fill this field";
               return false;
             }
           }
@@ -8674,7 +8673,7 @@ var render = function() {
                               "label",
                               {
                                 staticClass: "text-aa-dark",
-                                attrs: { for: "telephone" }
+                                attrs: { for: "url" }
                               },
                               [_vm._v("Telephone number")]
                             ),
@@ -8693,7 +8692,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 inputmode: "numeric",
-                                id: "telephone",
+                                id: "url",
                                 placeholder: "+2348012345678",
                                 required: ""
                               },
@@ -9180,7 +9179,7 @@ var render = function() {
                               _vm._v("All")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "Nigeria" } }, [
+                            _c("option", { domProps: { value: _vm.Nigeria } }, [
                               _vm._v("Nigeria")
                             ]),
                             _vm._v(" "),
@@ -13775,7 +13774,7 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass:
-                                    "text-aa-light hover:text-aa-light-active",
+                                    "text-link-400 hover:text-link-500",
                                   attrs: { href: "/p/site/" + site.id }
                                 },
                                 [_vm._v(_vm._s(site.url))]
@@ -13859,7 +13858,7 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass:
-                                    "text-aa-light hover:text-aa-light-active",
+                                    "text-link-400 hover:text-link-500",
                                   attrs: {
                                     href: "/p/site/" + site.id + "/statistics"
                                   }
@@ -13873,7 +13872,7 @@ var render = function() {
                                 "a",
                                 {
                                   staticClass:
-                                    "text-aa-light hover:text-aa-light-active",
+                                    "text-link-400 hover:text-link-500",
                                   attrs: { href: "/p/newadunit/" + site.id }
                                 },
                                 [_vm._v("New ad unit")]

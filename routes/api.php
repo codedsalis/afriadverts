@@ -99,3 +99,6 @@ Route::group(['prefix' => 'adunit'], function () {
 Route::group(['prefix' => 'adverts'], function () {
     Route::post('/adsetup', 'Api\AdvertsController@adsetup');
 });
+
+// Save payment records
+Route::post('paymentrecords', 'Api\UserController@savePaymentRecords');

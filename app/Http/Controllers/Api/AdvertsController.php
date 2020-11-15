@@ -128,9 +128,9 @@ class AdvertsController extends Controller
                 $advert->target_os = $request->input('platforms');
                 $advert->target_categories = $request->input('categories');
                 $advert->advert_token = $tokenStrings;
-                $advert->daily_budget = (integer)$request->input('daily_budget');
-                $advert->ad_budget = (integer)$request->input('total_budget');
-                $advert->ad_cpc = (integer)$request->input('cpc');
+                $advert->daily_budget = ((integer)$request->input('daily_budget')*100); // Convert from Naira to Kobo
+                $advert->ad_budget = ((integer)$request->input('total_budget')*100); // Convert from Naira to Kobo
+                $advert->ad_cpc = ((integer)$request->input('cpc')*100); // Convert from Naira to Kobo
                 $advert->duration = strtotime($request->input('duration'));
                 $advert->ad_images = \json_encode($data);
     
@@ -143,4 +143,5 @@ class AdvertsController extends Controller
         }
 
     }
+
 }

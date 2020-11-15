@@ -222,11 +222,11 @@
           <!-- End of website -->
           <!-- Begin destination for whatsapp and phone -->
           <div v-if="intent == 'whatsapp' || intent == 'phone'">
-            <label for="telephone" class="text-aa-dark">Telephone number</label>
+            <label for="url" class="text-aa-dark">Telephone number</label>
             <input
               type="text"
               inputmode="numeric"
-              id="telephone"
+              id="url"
               v-model="form.url"
               placeholder="+2348012345678"
               class="p-3 border-2 w-full border-gray-300 bg-white rounded focus:outline-none focus:border-link-100"
@@ -418,7 +418,7 @@
               required
             >
               <option :value="'all'">All</option>
-              <option value="Nigeria">Nigeria</option>
+              <option :value="Nigeria">Nigeria</option>
               <option :value="'Ghana'">Ghana</option>
               <option :value="'Kenya'">Kenya</option>
               <option :value="'Rwanda '">Rwanda</option>
@@ -1151,8 +1151,6 @@ export default {
             let doc = document.querySelector("#" + stepOne[i]);
             if (doc.value == "") {
               doc.classList.add("border-red-600");
-              document.querySelector("#error-" + stepOne[i]).innerHTML =
-                "Please fill this field";
               return false;
             }
           }
