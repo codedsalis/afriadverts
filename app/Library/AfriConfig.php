@@ -2,5 +2,5 @@
 namespace App\Library;
 
 class AfriConfig {
-    protected const USD = 360;
+    protected const USD = 400;
 }

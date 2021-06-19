@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use App\Library\Afriadverts;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
         //
         $Afriadverts = new Afriadverts;
         view()->share('Afriadverts', $Afriadverts);
+
+        Paginator::useTailwind();
     }
 }

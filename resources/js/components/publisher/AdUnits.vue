@@ -28,7 +28,7 @@
 
     <div
       v-if="adunits.total > 0"
-      class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md"
+      class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow"
     >
       <div class="overflow-x-scroll w-full">
         <table class="w-full table-auto border-collapse overflow-scroll">
@@ -84,58 +84,6 @@
       </div>
     </div>
     <br />
-
-    <!-- <table
-      v-if="adunits.total > 0"
-      class="table-auto border-collapse w-full flex flex-row flex-no-wrap rounded-lg overflow-hidden sm:shadow-sm my-5"
-    >
-      <thead class="text-gray-900">
-        <tr
-          class="flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"
-        >
-          <th class="px-4 py-2 text-left md:font-bold">ID</th>
-          <th class="px-4 py-2 text-left md:font-bold">Title</th>
-          <th class="px-4 py-2 text-left md:font-bold">Type</th>
-          <th class="px-4 py-2 text-left md:font-bold">Created</th>
-          <th class="px-4 py-2 text-left md:font-bold">Actions</th>
-        </tr>
-      </thead>
-      <tbody class="flex-1 sm:flex-none">
-        <tr
-          v-for="unit in adunit"
-          v-bind:key="unit.id"
-          class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
-        >
-          <td class="hover:bg-gray-300 px-4 py-2">{{ unit.id }}</td>
-          <td class="hover:bg-gray-300 px-4 py-2 truncate">
-            <a
-              :href="'/p/adunit/' + unit.id"
-              class="text-aa-light hover:text-aa-light-active"
-            >{{ unit.unit_title }}</a>
-          </td>
-          <td
-            class="hover:bg-gray-300 px-4 py-2 text-black hover:font-medium cursor-pointer"
-          >{{ unit.advert_type }}</td>
-          <td class="hover:bg-gray-300 px-4 py-2 text-black hover:font-medium cursor-pointer">
-            <show-date :date-val="unit.created_at"></show-date>
-          </td>
-          <td class="hover:bg-gray-300 px-4 py-2 text-black hover:font-medium cursor-pointer">
-            <a href class="text-aa-light hover:text-aa-light-active">
-              <i class="fa fa-pie-chart"></i> Statistics
-            </a> &#160;&#160;&#160;
-            <a
-              :href="'/p/adunit/' + unit.id"
-              class="text-aa-light hover:text-aa-light-active"
-            >
-              <i class="fa fa-code"></i> Ad Code
-            </a> &#160;&#160;&#160;
-            <a href class="text-red-700 hover:text-red-900">
-              <i class="fa fa-trash"></i> Delete
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>-->
   </div>
 </template>
 

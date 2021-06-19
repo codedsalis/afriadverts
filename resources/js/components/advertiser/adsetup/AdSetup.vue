@@ -242,7 +242,7 @@
           </div>
           <!-- end of whatsapp and phone -->
           <div>
-            <label for="subtext" class="text-aa-dark">Sub text</label>
+            <label for="subtext" class="text-aa-dark">Headline</label>
             <input
               type="text"
               id="subtext"
@@ -418,7 +418,7 @@
               required
             >
               <option :value="'all'">All</option>
-              <option :value="Nigeria">Nigeria</option>
+              <option :value="'Nigeria'">Nigeria</option>
               <option :value="'Ghana'">Ghana</option>
               <option :value="'Kenya'">Kenya</option>
               <option :value="'Rwanda '">Rwanda</option>
@@ -1048,8 +1048,6 @@ import "vue-loading-overlay/dist/vue-loading.css";
 
 //Import Noty for notifications
 import VueNoty from "vuejs-noty";
-
-Vue.use(VueNoty);
 
 //Import noty styles
 import "vuejs-noty/dist/vuejs-noty.css";

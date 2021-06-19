@@ -28,13 +28,15 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const api = 'http://127.0.0.1:8000/api';
-const assets = 'http://127.0.0.1:8000/img'
+const api = 'http://localhost:8000/api';
+const assets = 'http://localhost:8000/img';
+const banners = 'http://localhost:8000/banners';
 
 const app = new Vue({
     el: '#app',
     data: {
         api,
         assets,
+        banners,
     }
 });

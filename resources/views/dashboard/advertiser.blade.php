@@ -9,7 +9,6 @@
             <header class="text-2xl md:text-3xl font-bold text-gray-900">
                 Dashboard
             </header>
-            <advertiser-dashboard :user="{{ Auth::user() }}"></advertiser-dashboard>
         @else
             <div class="flex center flex-col justify-center">
                 <br />

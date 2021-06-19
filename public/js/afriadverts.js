@@ -175,12 +175,3 @@ function payWithPaystack(paymentMethod, userId) {
     });
     handler.openIframe();
 }
-
-// function savePaymentRecords(reference, userId) {
-//     var currency = document.querySelector('#currency').value;
-//     var amount = document.querySelector('#amount').value;
-//     var user_id = userId;
-//     var payment_method = document.querySelector('input[name="method"]:checked').value
-
-
-// }

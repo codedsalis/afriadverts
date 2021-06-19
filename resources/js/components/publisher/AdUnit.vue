@@ -31,7 +31,7 @@
                             });
                             }());&lt;/script&gt;</code>
                     </div>
-                    <button class="bg-aa-dark py-2 px-3 rounded text-white float-right mt-1" id="button1" @click="copyToClipboard('vCode')">Copy</button>
+                    <button class="bg-light-500 hover:bg-light-600 py-3 px-5 rounded-md text-white float-right mt-1 focus:outline-none" id="button1" @click="copyToClipboard('vCode')">Copy</button>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                             });
                             }());&lt;/script&gt;</code>
                     </div>
-                    <button class="bg-aa-dark py-2 px-3 rounded text-white float-right mt-1" id="button1" @click="copyToClipboard('vCode')">Copy</button>
+                    <button class="bg-light-500 hover:bg-light-600 py-3 px-5 rounded-md text-white float-right mt-1 focus:outline-none" id="button1" @click="copyToClipboard('vCode')">Copy</button>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                             });
                             }());&lt;/script&gt;</code>
                     </div>
-                    <button class="bg-aa-dark py-2 px-3 rounded text-white float-right mt-1" id="button1" @click="copyToClipboard('vCode')">Copy</button>
+                    <button class="bg-light-500 hover:bg-light-600 py-3 px-5 rounded-md text-white float-right mt-1 focus:outline-none" id="button1" @click="copyToClipboard('vCode')">Copy</button>
                 </div>
             </div>
         </div>
@@ -73,17 +73,10 @@
 
 <script>
 import axios from 'axios';
-
-//Import Noty for notifications
 import VueNoty from "vuejs-noty";
-
-Vue.use(VueNoty);
-
-//Import noty styles
 import "vuejs-noty/dist/vuejs-noty.css";
 export default {
     props: ["user", "unitId"],
-
     data() {
         return {
             isLoading: true,
@@ -99,7 +92,7 @@ export default {
 
     methods: {
         fetchAdUnit() {
-            axios.get(`/api/adunit/${this.unitId}`)
+            axios.get(`${this.$root.$data.api}/adunit/${this.unitId}`)
                 .then(response => {
                     this.isLoading = false;
                     this.adUnit = response.data.data;
@@ -130,7 +123,3 @@ export default {
 
 }
 </script>
-
-<style>
-
-</style>

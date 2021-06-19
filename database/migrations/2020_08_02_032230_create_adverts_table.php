@@ -37,6 +37,7 @@ class CreateAdvertsTable extends Migration
             $table->integer('ad_clicks')->unsigned();
             $table->integer('ad_impressions')->unsigned();
             $table->string('ad_status', 20); //Pending, stopped, paused, running, rejected, etc
+            $table->boolean('approved')->unsigned()->default(0);
             $table->timestamps();
         });
     }

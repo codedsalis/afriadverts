@@ -76,28 +76,44 @@ Route::get('sites', 'Api\SitesController@index');
 // ----------------------------------------------------------------------------------------
 
 
-//Ad Unit group routes for adunit/{id}
+// Ad Unit group routes for adunit/{id}
 Route::group(['prefix' => 'adunit'], function () {
 
-    //Get all ad units
+    // Get all ad units
     Route::get('/', 'Api\AdUnitsController@index');
 
-    //Get a particular ad unit
+    // Get a particular ad unit
     Route::get('/{id}', 'Api\AdUnitsController@show');
 
-    //create new ad unit
+    // create new ad unit
     Route::post('/', 'Api\AdUnitsController@store');
 
-    //Edit ad unit
+    // Edit ad unit
     Route::put('/', 'Api\AdUnitsController@store');
 
-    //Delete Ad Unit
+    // Delete Ad Unit
     Route::delete('/{id}', 'Api\AdUnitsController@destroy');
 });
 
 
 Route::group(['prefix' => 'adverts'], function () {
+    // Advert setup/creation
     Route::post('/adsetup', 'Api\AdvertsController@adsetup');
+
+    // Get advert statistics
+    Route::post('/statistics/{id}', 'Api\AdvertsController@adstatistics');
+
+    // Resume and pause advert
+    Route::put('/action', 'Api\AdvertsController@action');
+
+    // Update advert setup
+    Route::put('/', 'Api\AdvertsController@update');
+
+    // Update advert images
+    Route::post('/', 'Api\AdvertsController@updateImages');
+
+    // Delete advert
+    Route::delete('/', 'Api\AdvertsController@deleteAdvert');
 });
 
 // Save payment records

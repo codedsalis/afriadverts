@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Library\Afriadverts;
 use App\Models\Advert;
 
@@ -48,9 +49,22 @@ class AdvertiserController extends Controller
 
 
     // View ad info and stats
-    public function adinfo($id) {
+    public function adinfo($id, Request $request) {
         $advert = Advert::findOrFail($id);
 
-        return view('advertiser.adinfo')->with('adinfo', $advert);
+        $info = $request->info;
+
+        return view('advertiser.adinfo')->with([
+            'adinfo' => $advert,
+            'info' => $info
+            ]);
+    }
+
+
+    // View all adverts
+    public function alladverts() {
+        // Get adverts
+        $adverts = Advert::where('user_id', '=', Auth::id())->orderBy('created_at', 'DESC')->paginate(10);
+        return view('advertiser.alladverts')->with('adverts', $adverts);
     }
 }

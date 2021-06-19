@@ -1,27 +1,37 @@
 <template>
   <div class="vld-parent">
-    <loading :active.sync="isLoading" :can-cancel="false" :is-full-page="fullPage"></loading>
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="fullPage"
+    ></loading>
     <div class="container px-5 md:px-0 w-full md:w-2/4">
       <br />
       <form @submit.prevent="addNewSite">
         <input
           type="url"
           inputmode="url"
-          class="text-black rounded border-2 border-gray-400 p-3 w-full focus:transform focus:animation hover:animation hover:transform focus:border-2 focus:border-aa-darker"
+          class="text-black rounded border-2 border-gray-400 p-3 w-full focus:transform focus:animation hover:animation hover:transform focus:border-2 focus:border-link-100 focus:outline-none"
           v-model="site.url"
           placeholder="Domain name (ex: https://yourdomain.com)"
           autofocus
           required
         />
         <br />
-        <div v-for="urlError in error.url" v-bind:key="urlError" class="text-red-700">{{ urlError }}</div>
+        <div
+          v-for="urlError in error.url"
+          v-bind:key="urlError"
+          class="text-red-700"
+        >
+          {{ urlError }}
+        </div>
         <div class="flex flex-wrap justify-between mt-2">
           <div>
             <label for="category">Website Category:</label>
             <select
               id="category"
               v-model="site.category"
-              class="bg-white rounded p-3 border-2 border-gray-400 text-black w-full"
+              class="bg-white rounded p-3 border-2 border-gray-400 text-black w-full focus:outline-none focus:border-link-100"
             >
               <option value="General">General</option>
               <option value="Technology">Technology</option>
@@ -44,13 +54,17 @@
               v-for="categoryError in error.category"
               v-bind:key="categoryError"
               class="text-red-700"
-            >{{ categoryError }}</div>
+            >
+              {{ categoryError }}
+            </div>
           </div>
           <div>
             <button
               type="submit"
-              class="animation transform bg-aa-dark px-10 duration-500 py-3 text-white float-right hover:scale-200 hover:bg-aa-darker rounded-full mt-4"
-            >Submit</button>
+              class="animation transform bg-light-500 px-10 duration-500 py-3 text-white float-right hover:scale-200 hover:bg-light-600 rounded-md mt-4 focus:outline-none focus:bg-light-700"
+            >
+              Submit
+            </button>
           </div>
         </div>
       </form>
@@ -60,24 +74,12 @@
 
 <script>
 import axios from "axios";
-
-// Import component
 import Loading from "vue-loading-overlay";
-
-// Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
-
-//Import Noty for notifications
 import VueNoty from "vuejs-noty";
-
-Vue.use(VueNoty);
-
-//Import noty styles
 import "vuejs-noty/dist/vuejs-noty.css";
-
 export default {
   props: ["user"],
-
   data() {
     return {
       isLoading: false,

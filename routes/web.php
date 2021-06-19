@@ -87,6 +87,9 @@ Route::group(['prefix' => 'a'], function () {
     // View ad info and stats
     Route::get('/adinfo/{id}', 'AdvertiserController@adinfo');
 
+    // View all adverts
+    Route::get('/alladverts', 'AdvertiserController@alladverts');
+
 });
 
 

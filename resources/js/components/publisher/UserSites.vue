@@ -10,7 +10,7 @@
       <div class="text-2xl md:text-3xl font-bold text-gray-900">My sites</div>
       <a v-bind:href="'/p/newsite/'">
         <button
-          class="px-4 py-2 bg-light-500 text-white font-bold text-sm rounded-lg hover:bg-light-700 focus:border-light-600 mt-2 shadow-md focus:outline-none border-b-4 border-light-600 hover:border-aa-light-active"
+          class="px-10 py-3 bg-light-500 text-white font-bold text-sm rounded-lg hover:bg-light-700 focus:border-light-600 mt-2 shadow-md focus:outline-none border-b-4 border-light-600 hover:border-aa-light-active"
         >
           <i class="fa fa-plus"></i> New site
         </button>
@@ -33,7 +33,7 @@
     <!-- Begin sites -->
     <div v-else>
       <div
-        class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow-md"
+        class="container px-4 py-3 md:px-5 w-full bg-white rounded-lg shadow"
       >
         <div class="overflow-x-scroll w-full">
           <table class="table table-auto border-collapse">
